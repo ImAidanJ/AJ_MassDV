@@ -18,4 +18,4 @@ AddEventHandler("AJ:clearAllVehicles", function()
             end
         end
     end
-end) -- Lines 5-13 Inspired by wld-delallveh (https://github.com/Mutlak15/FiveM-dvall/blob/main/wld-delallveh/client/client.lua)
+end)
