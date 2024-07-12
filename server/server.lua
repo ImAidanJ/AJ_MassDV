@@ -5,21 +5,21 @@
 -- |___|_| |_| |_/_/   \_\_|\__,_|\__,_|_| |_|\___/ 
 -- 
 
+-- Function Variables --
 
--- VARIBLES
 local Prefix = Function.Prefix
 local resourceName = Function.ResourceName
 local version = Function.Version
 
+-- Run Checks --
 
--- Run Checks
 Citizen.CreateThread(function()
     checkName()
     debugCheck()
 end)
 
+-- Server Code --
 
--- Script Server Code
 RegisterCommand(Config.CommandName, function(source, args, rawCommand)
     if not Config.UseAcePermissions or IsPlayerAceAllowed(source, Config.AcePermissionString) then
 
@@ -40,18 +40,16 @@ RegisterCommand(Config.CommandName, function(source, args, rawCommand)
             end
         end
 
-        TriggerClientEvent("AJ:clearAllVehicles", -1)
-
-        Citizen.Wait(1000) -- 1 Seconds
+        TriggerClientEvent('AJ:VehClear', -1)
+        Citizen.Wait(1000)
 
         if Config.ClearChatAfterCleanup then
             TriggerClientEvent('chat:clear', -1)
-        end 
-
-        TriggerClientEvent("chat:addMessage", -1, { template = '<div style="padding: 0.5vw; text-align: center; margin: 0.5vw; background-color: rgba(46, 235, 94, 0.6); border-radius: 3px; color: white;"><b>{0}</b></div>', args = {"MassDV has been Completed."}})
+        end
         
+        TriggerClientEvent("chat:addMessage", -1, { template = '<div style="padding: 0.5vw; text-align: center; margin: 0.5vw; background-color: rgba(46, 235, 94, 0.6); border-radius: 3px; color: white;"><b>{0}</b></div>', args = {"MassDV has been Completed."}})
     else
-        TriggerClientEvent("chat:addMessage", source, {template = '<div style="padding: 0.5vw; text-align: center; margin: 0.5vw; background-color: rgba(255, 0, 0, 0.6); border-radius: 3px; color: white;"><b>{0}</b></div>', args = {"You do not have permission to use this command."}})    
+        TriggerClientEvent("chat:addMessage", source, {template = '<div style="padding: 0.5vw; text-align: center; margin: 0.5vw; background-color: rgba(255, 0, 0, 0.6); border-radius: 3px; color: white;"><b>{0}</b></div>', args = {"You do not have permission to use this command."}})
     end
 end, false)
 
